@@ -5,20 +5,19 @@ import { IsEmail, IsNotEmpty } from 'class-validator';
 
 @Entity({ schema: `user`, name: `usersSettings` })
 export class UserCredentialsEntity extends BaseEntity {
+	@Column(`varchar`, { length: 100, nullable: false })
+	@Index({ unique: true })
+	@IsNotEmpty()
+	@IsEmail()
+	public username?: string;
 
-  @Column(`varchar`, { length: 100, nullable: false })
-  @Index({ unique: true })
-  @IsNotEmpty()
-  @IsEmail()
-  public username?: string;
+	@Column(`text`)
+	@IsNotEmpty()
+	public salt?: string;
 
-  @Column(`text`)
-  @IsNotEmpty()
-  public salt?: string;
-
-  @Column("text")
-  @IsNotEmpty()
-  public hash?: string;
+	@Column('text')
+	@IsNotEmpty()
+	public hash?: string;
 
 	@ViewColumn({ name: 'userId' })
 	public userId?: string;

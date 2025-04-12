@@ -22,7 +22,7 @@ export class UserEntity extends BaseEntity {
 	public lastName?: string;
 
 	@Column(`varchar`, { length: 255, nullable: false })
-  @Index({ unique: true })
+	@Index({ unique: true })
 	@IsNotEmpty()
 	@IsString()
 	public clientId?: string;
@@ -36,7 +36,6 @@ export class UserEntity extends BaseEntity {
 	@OneToOne(() => UserSettingsEntity, (userSettings) => userSettings.users)
 	public userSetting?: UserSettingsEntity;
 
-  @OneToOne(() => UserCredentialsEntity, (userCredentials) => userCredentials.users)
+	@OneToOne(() => UserCredentialsEntity, (userCredentials) => userCredentials.users)
 	public userCredentials?: UserCredentialsEntity;
-
 }

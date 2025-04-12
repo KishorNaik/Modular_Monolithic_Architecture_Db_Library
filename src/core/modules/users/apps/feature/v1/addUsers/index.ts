@@ -23,7 +23,10 @@ Container.set<AddService<UserSettingsEntity>>(
 	new AddService<UserSettingsEntity>(UserSettingsEntity)
 );
 
-Container.set<AddService<UserCredentialsEntity>>(AddService<UserCredentialsEntity>,new AddService<UserCredentialsEntity>(UserCredentialsEntity));
+Container.set<AddService<UserCredentialsEntity>>(
+	AddService<UserCredentialsEntity>,
+	new AddService<UserCredentialsEntity>(UserCredentialsEntity)
+);
 
 @Service()
 export class AddUserService extends AddService<UserEntity> {
