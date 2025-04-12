@@ -5,8 +5,9 @@ import { UserSettingsEntity } from '../tUserSettings';
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 import { IsSafeString } from '../../../../../shared/utils/validations/decorators/isSafeString';
 import { UserKeysEntity } from '../tUserKeys';
+import { UserCredentialsEntity } from '../tUserCredentials';
 
-@Entity({ schema: `users`, name: `users` })
+@Entity({ schema: `user`, name: `users` })
 export class UserEntity extends BaseEntity {
 	@Column(`varchar`, { length: 100, nullable: false })
 	@IsNotEmpty()
@@ -21,6 +22,7 @@ export class UserEntity extends BaseEntity {
 	public lastName?: string;
 
 	@Column(`varchar`, { length: 255, nullable: false })
+  @Index({ unique: true })
 	@IsNotEmpty()
 	@IsString()
 	public clientId?: string;
@@ -33,4 +35,8 @@ export class UserEntity extends BaseEntity {
 
 	@OneToOne(() => UserSettingsEntity, (userSettings) => userSettings.users)
 	public userSetting?: UserSettingsEntity;
+
+  @OneToOne(() => UserCredentialsEntity, (userCredentials) => userCredentials.users)
+	public userCredentials?: UserCredentialsEntity;
+
 }

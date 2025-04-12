@@ -3,7 +3,7 @@ import { BaseEntity } from '../../../../../shared/entity/base';
 import { UserEntity } from '../tUsers';
 import { IsNotEmpty } from 'class-validator';
 
-@Entity({ schema: `users`, name: `usersKeys` })
+@Entity({ schema: `user`, name: `usersKeys` })
 export class UserKeysEntity extends BaseEntity {
 	@Column(`text`, { nullable: true, unique: true })
 	@IsNotEmpty()

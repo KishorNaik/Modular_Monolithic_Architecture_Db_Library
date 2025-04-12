@@ -4,6 +4,7 @@ import { UserEntity } from '../../../../infrastructures/entity/tUsers';
 import { UserCommunicationEntity } from '../../../../infrastructures/entity/tUserCommunication';
 import { UserKeysEntity } from '../../../../infrastructures/entity/tUserKeys';
 import { UserSettingsEntity } from '../../../../infrastructures/entity/tUserSettings';
+import { UserCredentialsEntity } from '../../../../infrastructures/entity/tUserCredentials';
 
 Container.set<AddService<UserEntity>>(
 	AddService<UserEntity>,
@@ -21,6 +22,8 @@ Container.set<AddService<UserSettingsEntity>>(
 	AddService<UserSettingsEntity>,
 	new AddService<UserSettingsEntity>(UserSettingsEntity)
 );
+
+Container.set<AddService<UserCredentialsEntity>>(AddService<UserCredentialsEntity>,new AddService<UserCredentialsEntity>(UserCredentialsEntity));
 
 @Service()
 export class AddUserService extends AddService<UserEntity> {
@@ -47,5 +50,12 @@ export class AddUserKeyService extends AddService<UserKeysEntity> {
 export class AddUserSettingsService extends AddService<UserSettingsEntity> {
 	public constructor() {
 		super(UserSettingsEntity);
+	}
+}
+
+@Service()
+export class AddUserCredentialsService extends AddService<UserCredentialsEntity> {
+	public constructor() {
+		super(UserCredentialsEntity);
 	}
 }

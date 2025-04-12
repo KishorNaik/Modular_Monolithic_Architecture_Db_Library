@@ -3,7 +3,7 @@ import { BaseEntity } from '../../../../../shared/entity/base';
 import { UserEntity } from '../tUsers';
 import { IsEmail, IsNotEmpty } from 'class-validator';
 
-@Entity({ schema: 'users', name: `usersCommunication` })
+@Entity({ schema: 'user', name: `usersCommunication` })
 export class UserCommunicationEntity extends BaseEntity {
 	@Column(`varchar`, { length: 100, nullable: false })
 	@Index({ unique: true })
