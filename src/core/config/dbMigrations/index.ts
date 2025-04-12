@@ -1,11 +1,8 @@
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USERNAME } from '../env';
-import {
-	UserCommunicationEntity,
-	UserEntity,
-	UserSettingsEntity,
-	UserTokenEntity,
-} from '../../modules/users';
+import { UserCommunicationEntity, UserEntity, UserSettingsEntity } from '../../modules/users';
+import { UserKeysEntity } from '../../modules/users/infrastructures/entity/tUserKeys';
+import { UserCredentialsEntity } from '../../modules/users/infrastructures/entity/tUserCredentials';
 
 /*
     Generate:
@@ -23,7 +20,13 @@ const connectionOptions: DataSourceOptions = {
 	database: DB_DATABASE,
 	synchronize: false,
 	logging: true,
-	entities: [UserEntity, UserCommunicationEntity, UserSettingsEntity, UserTokenEntity],
+	entities: [
+		UserEntity,
+		UserCommunicationEntity,
+		UserSettingsEntity,
+		UserKeysEntity,
+		UserCredentialsEntity,
+	],
 	subscribers: [],
 	migrations: ['src/core/config/dbMigrations/migrations/**/*.ts'],
 	migrationsTableName: 'custom_migration_table',

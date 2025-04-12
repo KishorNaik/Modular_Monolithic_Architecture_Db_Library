@@ -2,7 +2,7 @@ import Container, { Service } from 'typedi';
 import { AddService } from '../../../../../../shared/services/db/add';
 import { UserEntity } from '../../../../infrastructures/entity/tUsers';
 import { UserCommunicationEntity } from '../../../../infrastructures/entity/tUserCommunication';
-import { UserTokenEntity } from '../../../../infrastructures/entity/tUserKeys';
+import { UserKeysEntity } from '../../../../infrastructures/entity/tUserKeys';
 import { UserSettingsEntity } from '../../../../infrastructures/entity/tUserSettings';
 
 Container.set<AddService<UserEntity>>(
@@ -13,9 +13,9 @@ Container.set<AddService<UserCommunicationEntity>>(
 	AddService<UserCommunicationEntity>,
 	new AddService<UserCommunicationEntity>(UserCommunicationEntity)
 );
-Container.set<AddService<UserTokenEntity>>(
-	AddService<UserTokenEntity>,
-	new AddService<UserTokenEntity>(UserTokenEntity)
+Container.set<AddService<UserKeysEntity>>(
+	AddService<UserKeysEntity>,
+	new AddService<UserKeysEntity>(UserKeysEntity)
 );
 Container.set<AddService<UserSettingsEntity>>(
 	AddService<UserSettingsEntity>,
@@ -37,9 +37,9 @@ export class AddUserCommunicationService extends AddService<UserCommunicationEnt
 }
 
 @Service()
-export class AddUserTokenService extends AddService<UserTokenEntity> {
+export class AddUserKeyService extends AddService<UserKeysEntity> {
 	public constructor() {
-		super(UserTokenEntity);
+		super(UserKeysEntity);
 	}
 }
 

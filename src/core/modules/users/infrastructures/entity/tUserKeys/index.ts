@@ -15,12 +15,12 @@ export class UserKeysEntity extends BaseEntity {
 	@ViewColumn({ name: 'userId' })
 	public userId?: string;
 
-  @Column('text', { nullable: true, unique: true })
-  @IsNotEmpty()
+	@Column('text', { nullable: true, unique: true })
+	@IsNotEmpty()
 	public aesSecretKey?: string;
 
-  @Column('text', { nullable: true, unique: true })
-  @IsNotEmpty()
+	@Column('text', { nullable: true, unique: true })
+	@IsNotEmpty()
 	public hmacSecretKey?: string;
 
 	@OneToOne(() => UserEntity, (users) => users.userKeys, { cascade: true })

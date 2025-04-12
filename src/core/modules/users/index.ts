@@ -1,15 +1,23 @@
 import { UserCommunicationEntity } from './infrastructures/entity/tUserCommunication';
+import { UserCredentialsEntity } from './infrastructures/entity/tUserCredentials';
+import { UserKeysEntity } from './infrastructures/entity/tUserKeys';
 import { UserEntity } from './infrastructures/entity/tUsers';
 import { UserSettingsEntity } from './infrastructures/entity/tUserSettings';
-import { UserTokenEntity } from './infrastructures/entity/tUserKeys';
 
 // Entity Db Datasource Register
 export const userModuleDbDataSourceEntity: Function[] = [
 	UserEntity,
-	UserTokenEntity,
+	UserKeysEntity,
+	UserCredentialsEntity,
 	UserSettingsEntity,
 	UserCommunicationEntity,
 ];
 
 // Export Entity
-export { UserEntity, UserTokenEntity, UserSettingsEntity, UserCommunicationEntity };
+export {
+	UserEntity,
+	UserKeysEntity,
+	UserCredentialsEntity,
+	UserSettingsEntity,
+	UserCommunicationEntity,
+};

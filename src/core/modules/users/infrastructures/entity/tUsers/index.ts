@@ -20,7 +20,7 @@ export class UserEntity extends BaseEntity {
 	@IsSafeString()
 	public lastName?: string;
 
-  @Column(`varchar`, { length: 255, nullable: false })
+	@Column(`varchar`, { length: 255, nullable: false })
 	@IsNotEmpty()
 	@IsString()
 	public clientId?: string;

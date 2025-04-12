@@ -11,13 +11,13 @@ import {
 	AddUserCommunicationService,
 	AddUserService,
 	AddUserSettingsService,
-	AddUserTokenService,
+	AddUserKeyService,
 } from '../../../apps/feature/v1/addUsers';
 import { Result } from 'neverthrow';
 import expect from 'expect';
 import { Guid } from 'guid-typescript';
 import { UserCommunicationEntity } from '../../../infrastructures/entity/tUserCommunication';
-import { UserTokenEntity } from '../../../infrastructures/entity/tUserKeys';
+import { UserKeysEntity } from '../../../infrastructures/entity/tUserKeys';
 import { UserSettingsEntity } from '../../../infrastructures/entity/tUserSettings';
 
 // node --trace-deprecation --test --test-name-pattern='should_return_true_when_add_service_passed' --require ts-node/register -r tsconfig-paths/register ./src/core/modules/users/tests/v1/addUsers/index.test.ts
@@ -89,7 +89,7 @@ describe(`Add Users Unit Test`, () => {
 		userEntity.identifier = Guid.create().toString();
 		userEntity.firstName = '';
 		userEntity.lastName = '';
-		userEntity.email = '';
+		userEntity.clientId = '';
 		userEntity.status = StatusEnum.ACTIVE;
 		userEntity.created_date = new Date();
 		userEntity.modified_date = new Date();
@@ -115,7 +115,6 @@ describe(`Add Users Unit Test`, () => {
 		userEntity.identifier = Guid.create().toString();
 		userEntity.firstName = 'jhon';
 		userEntity.lastName = 'wick`';
-		userEntity.email = 'jhon1@gmail.com';
 		userEntity.status = StatusEnum.INACTIVE;
 		userEntity.created_date = new Date();
 		userEntity.modified_date = new Date();
@@ -134,9 +133,8 @@ describe(`Add Users Unit Test`, () => {
 
 		const userCommunication = new UserCommunicationEntity();
 		userCommunication.identifier = Guid.create().toString();
-		userCommunication.email = userEntity.email;
-		userCommunication.googleId = Guid.create().toString();
-		userCommunication.user_id = userEntity.identifier;
+		userCommunication.email = 'jhonwick@gmail.com';
+		userCommunication.userId = userEntity.identifier;
 		userCommunication.status = StatusEnum.INACTIVE;
 		userCommunication.created_date = new Date();
 		userCommunication.modified_date = new Date();
@@ -152,11 +150,11 @@ describe(`Add Users Unit Test`, () => {
 			return;
 		}
 
-		const userToken = new UserTokenEntity();
+		const userToken = new UserKeysEntity();
 		userToken.identifier = Guid.create().toString();
 		userToken.refresh_token = Guid.create().toString();
-		userToken.expires_at = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
-		userToken.user_id = userEntity.identifier;
+		userToken.refresh_Token_expires_at = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+		userToken.userId = userEntity.identifier;
 		userToken.status = StatusEnum.INACTIVE;
 		userToken.created_date = new Date();
 		userToken.modified_date = new Date();
@@ -164,7 +162,7 @@ describe(`Add Users Unit Test`, () => {
 
 		//userEntity.userToken=userToken;
 
-		const addUserTokenServiceResult = await new AddUserTokenService().handleAsync(
+		const addUserTokenServiceResult = await new AddUserKeyService().handleAsync(
 			userToken,
 			queryRunner
 		);
@@ -176,7 +174,7 @@ describe(`Add Users Unit Test`, () => {
 
 		const userSettings = new UserSettingsEntity();
 		userSettings.identifier = Guid.create().toString();
-		userSettings.user_id = userEntity.identifier;
+		userSettings.userId = userEntity.identifier;
 		userSettings.isEmailVerified = false;
 		userSettings.status = StatusEnum.INACTIVE;
 		userSettings.created_date = new Date();

@@ -9,8 +9,8 @@ export class UserSettingsEntity extends BaseEntity {
 	@IsBoolean()
 	public isEmailVerified?: boolean;
 
-  @Column("bool", { default:false})
-  public isWelcomeEmailSent?: boolean;
+	@Column('bool', { default: false })
+	public isWelcomeEmailSent?: boolean;
 
 	@ViewColumn({ name: 'userId' })
 	public userId?: string;

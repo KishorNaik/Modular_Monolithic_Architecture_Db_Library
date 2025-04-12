@@ -11,11 +11,11 @@ export class UserCommunicationEntity extends BaseEntity {
 	@IsEmail()
 	public email?: string;
 
-  @Column(`varchar`, {nullable: false })
+	@Column(`varchar`, { nullable: false })
 	@Index({ unique: true })
 	@IsNotEmpty()
 	@IsEmail()
-  public mobileNo?:string
+	public mobileNo?: string;
 
 	@ViewColumn({ name: 'userId' })
 	public userId?: string;
