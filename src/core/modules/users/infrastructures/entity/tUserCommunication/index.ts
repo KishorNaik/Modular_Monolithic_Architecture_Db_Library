@@ -14,7 +14,7 @@ export class UserCommunicationEntity extends BaseEntity {
 	@Column(`varchar`, { nullable: false })
 	@Index({ unique: true })
 	@IsNotEmpty()
-  @IsMobilePhone("en-IN")
+	@IsMobilePhone('en-IN')
 	public mobileNo?: string;
 
 	@ViewColumn({ name: 'userId' })

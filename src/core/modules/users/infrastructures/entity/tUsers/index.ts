@@ -25,7 +25,7 @@ export class UserEntity extends BaseEntity {
 	@Index({ unique: true })
 	@IsNotEmpty()
 	@IsString()
-  @IsUUID()
+	@IsUUID()
 	public clientId?: string;
 
 	@OneToOne(() => UserCommunicationEntity, (userCommunication) => userCommunication.users)
