@@ -1,9 +1,9 @@
 import { BaseEntity } from '../../../../../shared/entity/base';
 import { Column, Entity, Index, JoinColumn, OneToOne, ViewColumn } from 'typeorm';
 import { UserEntity } from '../tUsers';
-import { IsEmail, IsNotEmpty } from 'class-validator';
+import { IsEmail, IsHash, IsNotEmpty } from 'class-validator';
 
-@Entity({ schema: `user`, name: `usersSettings` })
+@Entity({ schema: `user`, name: `usersCredentials` })
 export class UserCredentialsEntity extends BaseEntity {
 	@Column(`varchar`, { length: 100, nullable: false })
 	@Index({ unique: true })

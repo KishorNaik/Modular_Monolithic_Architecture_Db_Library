@@ -2,7 +2,7 @@ import { Column, Entity, Index, OneToOne } from 'typeorm';
 import { BaseEntity } from '../../../../../shared/entity/base';
 import { UserCommunicationEntity } from '../tUserCommunication';
 import { UserSettingsEntity } from '../tUserSettings';
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, IsUUID } from 'class-validator';
 import { IsSafeString } from '../../../../../shared/utils/validations/decorators/isSafeString';
 import { UserKeysEntity } from '../tUserKeys';
 import { UserCredentialsEntity } from '../tUserCredentials';
@@ -25,6 +25,7 @@ export class UserEntity extends BaseEntity {
 	@Index({ unique: true })
 	@IsNotEmpty()
 	@IsString()
+  @IsUUID()
 	public clientId?: string;
 
 	@OneToOne(() => UserCommunicationEntity, (userCommunication) => userCommunication.users)

@@ -20,3 +20,4 @@ export * from './modules/users/infrastructures/entity/tUserCommunication';
 export * from './modules/users/infrastructures/entity/tUsers';
 export * from './modules/users/infrastructures/entity/tUserSettings';
 export * from './modules/users/infrastructures/entity/tUserKeys';
+export * from './modules/users/infrastructures/entity/tUserCredentials';

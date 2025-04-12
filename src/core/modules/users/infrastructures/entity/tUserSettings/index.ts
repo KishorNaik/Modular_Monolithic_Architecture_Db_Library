@@ -13,13 +13,13 @@ export class UserSettingsEntity extends BaseEntity {
 	public emailVerificationToken?: string;
 
 	@Column('enum', { enum: BoolEnum, default: BoolEnum.NO })
-	public isEmailVerified?: boolean;
+	public isEmailVerified?: BoolEnum;
 
 	@Column('enum', { enum: BoolEnum, default: BoolEnum.NO })
-	public isVerificationEmailSent?: boolean;
+	public isVerificationEmailSent?: BoolEnum;
 
 	@Column('enum', { enum: BoolEnum, default: BoolEnum.NO })
-	public isWelcomeEmailSent?: boolean;
+	public isWelcomeEmailSent?: BoolEnum;
 
 	@ViewColumn({ name: 'userId' })
 	public userId?: string;

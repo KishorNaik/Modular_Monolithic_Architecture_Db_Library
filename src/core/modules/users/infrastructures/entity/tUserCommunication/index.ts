@@ -1,7 +1,7 @@
 import { Column, Entity, Index, JoinColumn, OneToOne, ViewColumn } from 'typeorm';
 import { BaseEntity } from '../../../../../shared/entity/base';
 import { UserEntity } from '../tUsers';
-import { IsEmail, IsNotEmpty } from 'class-validator';
+import { IsEmail, IsMobilePhone, IsNotEmpty } from 'class-validator';
 
 @Entity({ schema: 'user', name: `usersCommunication` })
 export class UserCommunicationEntity extends BaseEntity {
@@ -14,7 +14,7 @@ export class UserCommunicationEntity extends BaseEntity {
 	@Column(`varchar`, { nullable: false })
 	@Index({ unique: true })
 	@IsNotEmpty()
-	@IsEmail()
+  @IsMobilePhone("en-IN")
 	public mobileNo?: string;
 
 	@ViewColumn({ name: 'userId' })
