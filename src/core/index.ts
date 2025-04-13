@@ -14,4 +14,4 @@ export * from '../core/shared/models/types/order/index';
 export * from '../core/shared/models/types/pagination/index';
 export * from '../core/shared/models/response/data.Response';
 
-export * from "../core/modules/users/index";
+export * from '../core/modules/users/index';
