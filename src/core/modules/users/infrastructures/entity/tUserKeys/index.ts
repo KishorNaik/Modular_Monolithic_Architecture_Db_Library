@@ -9,7 +9,7 @@ export class UserKeysEntity extends BaseEntity {
 	@IsNotEmpty()
 	public refresh_token?: string;
 
-	@Column(`date`)
+	@Column(`date`,{ nullable: true })
 	public refresh_Token_expires_at?: Date;
 
 	@ViewColumn({ name: 'userId' })
