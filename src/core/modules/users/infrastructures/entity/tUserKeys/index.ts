@@ -1,12 +1,12 @@
 import { Column, Entity, JoinColumn, OneToOne, ViewColumn } from 'typeorm';
 import { BaseEntity } from '../../../../../shared/entity/base';
 import { UserEntity } from '../tUsers';
-import { IsNotEmpty } from 'class-validator';
+import { IsEmpty, IsNotEmpty } from 'class-validator';
 
 @Entity({ schema: `user`, name: `usersKeys` })
 export class UserKeysEntity extends BaseEntity {
-	@Column(`text`, { nullable: true, unique: true })
-	@IsNotEmpty()
+	@Column(`text`, { nullable: true })
+	@IsEmpty()
 	public refresh_token?: string;
 
 	@Column(`date`, { nullable: true })
