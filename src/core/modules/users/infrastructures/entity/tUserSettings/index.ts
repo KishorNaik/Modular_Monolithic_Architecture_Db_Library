@@ -1,16 +1,16 @@
 import { Column, Entity, Index, JoinColumn, OneToOne, ViewColumn } from 'typeorm';
 import { BaseEntity } from '../../../../../shared/entity/base';
 import { UserEntity } from '../tUsers';
-import { IsBoolean, IsNotEmpty, IsUUID } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsUUID, ValidateIf } from 'class-validator';
 import { BoolEnum } from '../../../../../shared/models/enums/bool.enum';
 
 @Entity({ schema: `user`, name: `usersSettings` })
 export class UserSettingsEntity extends BaseEntity {
-	@Column('varchar', { length: 50 })
-	@IsNotEmpty()
+	@Column('varchar', { length: 50, nullable:true })
+	@ValidateIf((o) => o.emailVerificationToken !== null && o.emailVerificationToken !== undefined)
+  @IsNotEmpty({ message: 'emailVerification token must be a non-empty string' })
 	@IsUUID()
-	@Index({ unique: true })
-	public emailVerificationToken?: string;
+	public emailVerificationToken?: string|null;
 
 	@Column('enum', { enum: BoolEnum, default: BoolEnum.NO })
 	public isEmailVerified?: BoolEnum;

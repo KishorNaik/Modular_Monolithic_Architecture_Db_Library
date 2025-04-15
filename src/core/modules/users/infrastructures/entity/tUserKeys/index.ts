@@ -1,16 +1,17 @@
 import { Column, Entity, JoinColumn, OneToOne, ViewColumn } from 'typeorm';
 import { BaseEntity } from '../../../../../shared/entity/base';
 import { UserEntity } from '../tUsers';
-import { IsEmpty, IsNotEmpty } from 'class-validator';
+import { IsEmpty, IsNotEmpty, ValidateIf } from 'class-validator';
 
 @Entity({ schema: `user`, name: `usersKeys` })
 export class UserKeysEntity extends BaseEntity {
 	@Column(`text`, { nullable: true })
-	@IsEmpty()
-	public refresh_token?: string;
+  @ValidateIf((o) => o.refresh_token !== null && o.refresh_token !== undefined)
+  @IsNotEmpty({ message: 'Refresh token must be a non-empty string' })
+	public refresh_token?: string|null;
 
 	@Column(`date`, { nullable: true })
-	public refresh_Token_expires_at?: Date;
+	public refresh_Token_expires_at?: Date|null;
 
 	@ViewColumn({ name: 'userId' })
 	public userId?: string;
