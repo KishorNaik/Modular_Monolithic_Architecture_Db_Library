@@ -6,12 +6,12 @@ import { IsEmpty, IsNotEmpty, ValidateIf } from 'class-validator';
 @Entity({ schema: `user`, name: `usersKeys` })
 export class UserKeysEntity extends BaseEntity {
 	@Column(`text`, { nullable: true })
-  @ValidateIf((o) => o.refresh_token !== null && o.refresh_token !== undefined)
-  @IsNotEmpty({ message: 'Refresh token must be a non-empty string' })
-	public refresh_token?: string|null;
+	@ValidateIf((o) => o.refresh_token !== null && o.refresh_token !== undefined)
+	@IsNotEmpty({ message: 'Refresh token must be a non-empty string' })
+	public refresh_token?: string | null;
 
 	@Column(`date`, { nullable: true })
-	public refresh_Token_expires_at?: Date|null;
+	public refresh_Token_expires_at?: Date | null;
 
 	@ViewColumn({ name: 'userId' })
 	public userId?: string;

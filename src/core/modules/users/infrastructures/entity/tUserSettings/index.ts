@@ -6,11 +6,11 @@ import { BoolEnum } from '../../../../../shared/models/enums/bool.enum';
 
 @Entity({ schema: `user`, name: `usersSettings` })
 export class UserSettingsEntity extends BaseEntity {
-	@Column('varchar', { length: 50, nullable:true })
+	@Column('varchar', { length: 50, nullable: true })
 	@ValidateIf((o) => o.emailVerificationToken !== null && o.emailVerificationToken !== undefined)
-  @IsNotEmpty({ message: 'emailVerification token must be a non-empty string' })
+	@IsNotEmpty({ message: 'emailVerification token must be a non-empty string' })
 	@IsUUID()
-	public emailVerificationToken?: string|null;
+	public emailVerificationToken?: string | null;
 
 	@Column('enum', { enum: BoolEnum, default: BoolEnum.NO })
 	public isEmailVerified?: BoolEnum;
