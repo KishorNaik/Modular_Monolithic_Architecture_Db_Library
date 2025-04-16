@@ -12,7 +12,7 @@ export class UserSettingsEntity extends BaseEntity {
 	@IsUUID()
 	public emailVerificationToken?: string | null;
 
-  @Column(`date`, { nullable: true })
+	@Column(`date`, { nullable: true })
 	public email_Verification_Token_expires_at?: Date | null;
 
 	@Column('enum', { enum: BoolEnum, default: BoolEnum.NO })
