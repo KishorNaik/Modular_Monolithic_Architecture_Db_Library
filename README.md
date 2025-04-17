@@ -15,6 +15,7 @@ nm run typeorm:migrate
 ```
 
 ### .env
+
 ```env
 # Database
 DB_HOST = localhost
@@ -23,6 +24,6 @@ DB_HOST = localhost
 #DB_PORT = 3306 -MySql
 DB_PORT = 5432
 DB_USERNAME = postgres
-DB_PASSWORD = 
+DB_PASSWORD =
 DB_DATABASE = mma
 ```
