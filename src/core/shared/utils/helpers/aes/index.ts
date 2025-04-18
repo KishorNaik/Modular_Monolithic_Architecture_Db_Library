@@ -4,8 +4,9 @@ import { Service } from 'typedi';
 import { Err, Ok, Result } from 'neverthrow';
 import { IServiceHandlerAsync } from '../services';
 import { ResultError } from '../../exceptions/results';
-import { ivLength } from '../../../models/constant';
 import { StatusCodes } from 'http-status-codes';
+import { ivLength } from '../../../models/constant';
+import { AesResponseDto } from '../../../models/response/aes.ResponseDto';
 
 export class AES {
 	private _ivLength: number = ivLength;
@@ -62,14 +63,19 @@ export interface IAesEncryptParameters<T extends object> {
 	key: string;
 }
 
+export interface IAesEncryptResult {
+	encryptedText?: string;
+	aesResponseDto?: AesResponseDto;
+}
+
 export interface IAesEncryptWrapper<T extends object>
-	extends IServiceHandlerAsync<IAesEncryptParameters<T>, string> {}
+	extends IServiceHandlerAsync<IAesEncryptParameters<T>, IAesEncryptResult> {}
 
 @Service()
 export class AesEncryptWrapper<T extends object> implements IAesEncryptWrapper<T> {
 	public async handleAsync(
 		params: IAesEncryptParameters<T>
-	): Promise<Result<string, ResultError>> {
+	): Promise<Result<IAesEncryptResult, ResultError>> {
 		try {
 			if (!params)
 				return new Err(new ResultError(StatusCodes.BAD_REQUEST, 'parameter is null'));
@@ -89,10 +95,18 @@ export class AesEncryptWrapper<T extends object> implements IAesEncryptWrapper<T
 			if (!encryptedBody)
 				return new Err(new ResultError(StatusCodes.BAD_REQUEST, 'encryptedBody is null'));
 
-			return new Ok(encryptedBody);
+			const aesResponseDto: AesResponseDto = new AesResponseDto();
+			aesResponseDto.body = encryptedBody;
+
+			const response: IAesEncryptResult = {
+				encryptedText: encryptedBody,
+				aesResponseDto: aesResponseDto,
+			};
+
+			return new Ok(response);
 		} catch (ex) {
-			const error = ex as Error;
-			return new Err(new ResultError(StatusCodes.BAD_REQUEST, error.message));
+      const error=ex as Error;
+			return new Err(new ResultError(StatusCodes.INTERNAL_SERVER_ERROR, error?.message));
 		}
 	}
 }
@@ -127,8 +141,8 @@ export class AesDecryptWrapper<T extends object> implements IAesDecryptWrapper<T
 
 			return new Ok(body as T);
 		} catch (ex) {
-			const error = ex as Error;
-			return new Err(new ResultError(StatusCodes.BAD_REQUEST, error.message));
+      const error=ex as Error;
+			return new Err(new ResultError(StatusCodes.INTERNAL_SERVER_ERROR, error.message));
 		}
 	}
 }

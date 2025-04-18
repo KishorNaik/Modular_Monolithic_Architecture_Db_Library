@@ -1,3 +1,4 @@
+
 import axios, {
 	AxiosError,
 	AxiosInstance,
@@ -6,8 +7,8 @@ import axios, {
 	InternalAxiosRequestConfig,
 } from 'axios';
 import { Err, Ok, Result } from 'neverthrow';
+import { DataResponse } from '../../../models/response/data.Response';
 import { ResultError } from '../../exceptions/results';
-import { StatusCodes } from 'http-status-codes';
 
 export interface AxiosHelperConfig {
 	baseURL: string;
@@ -50,22 +51,25 @@ export class AxiosHelper {
 	public async getAsync<TResponse>(
 		endpoint: string,
 		config?: AxiosRequestConfig
-	): Promise<Result<TResponse, ResultError>> {
+	): Promise<Result<DataResponse<TResponse>, ResultError>> {
 		try {
-			const response = await this.axiosInstance.get<TResponse>(endpoint, config);
+			const response = await this.axiosInstance.get<DataResponse<TResponse>>(
+				endpoint,
+				config
+			);
 			return new Ok(response.data);
 		} catch (ex) {
 			if (axios.isAxiosError(ex)) {
-				const axiosError = ex as AxiosError<TResponse>;
+				const axiosError = ex as AxiosError<DataResponse<TResponse>>;
 				return new Err(
 					new ResultError(
-						axiosError.response?.status! ?? 500,
-						axiosError.message || ex.message
+						axiosError.response?.data.StatusCode ?? 500,
+						axiosError.response?.data?.Message || ex.message
 					)
 				);
 			}
 
-			return new Err(new ResultError(StatusCodes.INTERNAL_SERVER_ERROR, (<Error>ex).message));
+			return new Err(new ResultError(500, (<Error>ex).message));
 		}
 	}
 
@@ -73,22 +77,26 @@ export class AxiosHelper {
 		endPoint: string,
 		data: TRequest,
 		config?: AxiosRequestConfig
-	): Promise<Result<TResponse, ResultError>> {
+	): Promise<Result<DataResponse<TResponse>, ResultError>> {
 		try {
-			const response = await this.axiosInstance.post<TResponse>(endPoint, data, config);
+			const response = await this.axiosInstance.post<DataResponse<TResponse>>(
+				endPoint,
+				data,
+				config
+			);
 			return new Ok(response.data);
 		} catch (ex) {
 			if (axios.isAxiosError(ex)) {
-				const axiosError = ex as AxiosError<TResponse>;
+				const axiosError = ex as AxiosError<DataResponse<TResponse>>;
 				return new Err(
 					new ResultError(
-						axiosError.response?.status! ?? 500,
-						axiosError.message || ex.message
+						axiosError.response?.data.StatusCode ?? 500,
+						axiosError.response?.data?.Message || ex.message
 					)
 				);
 			}
 
-			return new Err(new ResultError(StatusCodes.INTERNAL_SERVER_ERROR, (<Error>ex).message));
+			return new Err(new ResultError(500, (<Error>ex).message));
 		}
 	}
 
@@ -96,44 +104,51 @@ export class AxiosHelper {
 		endPoint: string,
 		data: TRequest,
 		config?: AxiosRequestConfig
-	): Promise<Result<TResponse, ResultError>> {
+	): Promise<Result<DataResponse<TResponse>, ResultError>> {
 		try {
-			const response = await this.axiosInstance.put<TResponse>(endPoint, data, config);
+			const response = await this.axiosInstance.put<DataResponse<TResponse>>(
+				endPoint,
+				data,
+				config
+			);
 			return new Ok(response.data);
 		} catch (ex) {
 			if (axios.isAxiosError(ex)) {
-				const axiosError = ex as AxiosError<TResponse>;
+				const axiosError = ex as AxiosError<DataResponse<TResponse>>;
 				return new Err(
 					new ResultError(
-						axiosError.response?.status! ?? 500,
-						axiosError.message || ex.message
+						axiosError.response?.data.StatusCode ?? 500,
+						axiosError.response?.data?.Message || ex.message
 					)
 				);
 			}
 
-			return new Err(new ResultError(StatusCodes.INTERNAL_SERVER_ERROR, (<Error>ex).message));
+			return new Err(new ResultError(500, (<Error>ex).message));
 		}
 	}
 
 	public async deleteAsync<TResponse>(
 		endPoint: string,
 		config?: AxiosRequestConfig
-	): Promise<Result<TResponse, ResultError>> {
+	): Promise<Result<DataResponse<TResponse>, ResultError>> {
 		try {
-			const response = await this.axiosInstance.delete<TResponse>(endPoint, config);
+			const response = await this.axiosInstance.delete<DataResponse<TResponse>>(
+				endPoint,
+				config
+			);
 			return new Ok(response.data);
 		} catch (ex) {
 			if (axios.isAxiosError(ex)) {
-				const axiosError = ex as AxiosError<Response>;
+				const axiosError = ex as AxiosError<DataResponse<TResponse>>;
 				return new Err(
 					new ResultError(
-						axiosError.response?.status! ?? 500,
-						axiosError.message || ex.message
+						axiosError.response?.data.StatusCode ?? 500,
+						axiosError.response?.data?.Message || ex.message
 					)
 				);
 			}
 
-			return new Err(new ResultError(StatusCodes.INTERNAL_SERVER_ERROR, (<Error>ex).message));
+			return new Err(new ResultError(500, (<Error>ex).message));
 		}
 	}
 
@@ -141,22 +156,26 @@ export class AxiosHelper {
 		endPoint: string,
 		data: TRequest,
 		config?: AxiosRequestConfig
-	): Promise<Result<TResponse, ResultError>> {
+	): Promise<Result<DataResponse<TResponse>, ResultError>> {
 		try {
-			const response = await this.axiosInstance.patch<TResponse>(endPoint, data, config);
+			const response = await this.axiosInstance.patch<DataResponse<TResponse>>(
+				endPoint,
+				data,
+				config
+			);
 			return new Ok(response.data);
 		} catch (ex) {
 			if (axios.isAxiosError(ex)) {
-				const axiosError = ex as AxiosError<Response>;
+				const axiosError = ex as AxiosError<DataResponse<TResponse>>;
 				return new Err(
 					new ResultError(
-						axiosError.response?.status! ?? 500,
-						axiosError.message || ex.message
+						axiosError.response?.data.StatusCode ?? 500,
+						axiosError.response?.data?.Message || ex.message
 					)
 				);
 			}
 
-			return new Err(new ResultError(StatusCodes.INTERNAL_SERVER_ERROR, (<Error>ex).message));
+			return new Err(new ResultError(500, (<Error>ex).message));
 		}
 	}
 }
