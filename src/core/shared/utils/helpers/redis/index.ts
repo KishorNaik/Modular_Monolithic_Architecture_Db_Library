@@ -1,4 +1,3 @@
-
 import { createClient, RedisClientType, RedisFunctions, RedisModules, RedisScripts } from 'redis';
 import { logger } from '../loggers';
 import { Ok, Result } from 'neverthrow';

@@ -104,8 +104,10 @@ export class SagaBuilder<TSagaResult> {
 					}
 				}
 			} catch (ex) {
-        const error=ex as Error;
-				console.error(`Activity ${activity.activityName} failed with error: ${error.message}`);
+				const error = ex as Error;
+				console.error(
+					`Activity ${activity.activityName} failed with error: ${error.message}`
+				);
 				throw ex;
 			}
 		}

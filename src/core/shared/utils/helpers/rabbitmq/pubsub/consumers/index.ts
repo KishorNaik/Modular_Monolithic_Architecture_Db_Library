@@ -1,6 +1,6 @@
 import { Service } from 'typedi';
 import { connect, ChannelWrapper, AmqpConnectionManager } from 'amqp-connection-manager';
-import { ConfirmChannel, ConsumeMessage } from 'amqplib';;
+import { ConfirmChannel, ConsumeMessage } from 'amqplib';
 import { logger } from '../../../loggers';
 import { RABBITMQ_URL } from '../../../../../../config/env';
 

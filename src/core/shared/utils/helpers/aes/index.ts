@@ -105,7 +105,7 @@ export class AesEncryptWrapper<T extends object> implements IAesEncryptWrapper<T
 
 			return new Ok(response);
 		} catch (ex) {
-      const error=ex as Error;
+			const error = ex as Error;
 			return new Err(new ResultError(StatusCodes.INTERNAL_SERVER_ERROR, error?.message));
 		}
 	}
@@ -141,7 +141,7 @@ export class AesDecryptWrapper<T extends object> implements IAesDecryptWrapper<T
 
 			return new Ok(body as T);
 		} catch (ex) {
-      const error=ex as Error;
+			const error = ex as Error;
 			return new Err(new ResultError(StatusCodes.INTERNAL_SERVER_ERROR, error.message));
 		}
 	}
