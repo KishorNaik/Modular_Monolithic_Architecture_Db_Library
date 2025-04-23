@@ -26,3 +26,4 @@ export * from '../users/apps/feature/v1/getVersion';
 export * from '../users/apps/feature/v1/updateUsers';
 export * from '../users/apps/feature/v1/updateVersion';
 export * from '../users/apps/feature/v1/getEmailVerificationToken';
+export * from '../users/apps/feature/v1/getUsers';
